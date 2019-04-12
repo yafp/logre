@@ -5,7 +5,7 @@
 */
 function update()
 {
-    console.log("update ::: Start"); 
+    console.log("update ::: Start");
 
     // destroy DataTable
     //
@@ -16,7 +16,7 @@ function update()
     // reload data
     initApp();
 
-    console.log("update ::: End"); 
+    console.log("update ::: End");
 }
 
 
@@ -27,11 +27,11 @@ function update()
 */
 function checkRequirements()
 {
-    console.log("checkRequirements ::: Start"); 
+    console.log("checkRequirements ::: Start");
     checkSupportedOperatingSystem();
     checkForSyslogExistance();
     checkDisplaySize();
-    console.log("checkRequirements ::: End"); 
+    console.log("checkRequirements ::: End");
 }
 
 
@@ -42,7 +42,7 @@ function checkRequirements()
 */
 function checkDisplaySize()
 {
-    console.log("checkDisplaySize ::: Start"); 
+    console.log("checkDisplaySize ::: Start");
 
     // get current screen size
     var monitorWidth = screen.width;
@@ -57,9 +57,9 @@ function checkDisplaySize()
     // resize window
     //
     const {ipcRenderer} = require('electron');
-    ipcRenderer.send('resize-me-please', windowWidth, windowHeight)
+    ipcRenderer.send("resize-me-please", windowWidth, windowHeight)
 
-    console.log("checkDisplaySize ::: End"); 
+    console.log("checkDisplaySize ::: End");
 }
 
 
@@ -70,11 +70,11 @@ function checkDisplaySize()
 */
 function checkSupportedOperatingSystem()
 {
-    console.log("checkSupportedOperatingSystem ::: Start"); 
+    console.log("checkSupportedOperatingSystem ::: Start");
 
     var userPlatform = process.platform;
     console.log("checkSupportedOperatingSystem ::: Detected operating system as: " + userPlatform);
-    
+
     if(userPlatform == "linux")
     {
         console.log("checkSupportedOperatingSystem ::: Operating system " + userPlatform + " is fine." );
@@ -93,7 +93,7 @@ function checkSupportedOperatingSystem()
         console.error("checkSupportedOperatingSystem ::: Operating system " + userPlatform + " is not supported." );
     }
 
-    console.log("checkSupportedOperatingSystem ::: End"); 
+    console.log("checkSupportedOperatingSystem ::: End");
 }
 
 
@@ -109,9 +109,9 @@ function checkForSyslogExistance()
 
     var logFile = "/var/log/syslog";
 
-    if (fs.existsSync(logFile)) 
+    if (fs.existsSync(logFile))
     {
-        console.log('checkForSyslogExistance ::: Found logfile: ' + logFile);
+        console.log("checkForSyslogExistance ::: Found logfile: " + logFile);
     }
     else
     {
@@ -122,7 +122,7 @@ function checkForSyslogExistance()
 
         // show  error dialog
         //
-        $('#myModal').modal('show');
+        $("#myModal").modal("show");
         //$('#myModal').modal('toggle');
         //$('#myModal').modal('hide');
     }
@@ -137,13 +137,13 @@ function checkForSyslogExistance()
 */
 function openURL(url)
 {
-    console.log("openURL ::: Start"); 
+    console.log("openURL ::: Start");
 
-    const {shell} = require('electron'); 
+    const {shell} = require('electron');
     console.log('openURL ::: Trying to open the url: ' + url);
     shell.openExternal(url);
 
-    console.log("openURL ::: End"); 
+    console.log("openURL ::: End");
 }
 
 
@@ -179,7 +179,7 @@ function initApp()
     console.log("initApp ::: Start");
 
     // init select2
-    $('#logSource').select2();
+    $("#logSource").select2();
 
     // creating empty arrays
     var arrayLogDate = [];
@@ -187,7 +187,7 @@ function initApp()
     var arrayLogApp = [];
     var arrayLogMsg= [];
 
-    // Read from file 
+    // Read from file
     //
     // source: https://stackoverflow.com/questions/6831918/node-js-read-a-text-file-into-an-array-each-line-an-item-in-the-array
     //
@@ -196,14 +196,14 @@ function initApp()
     var fs = require('fs');
 
     // Asynchronous
-    fs.readFile('/var/log/syslog', function(err, data) 
+    fs.readFile('/var/log/syslog', function(err, data)
     {
       if(err) throw err;
 
       var array = data.toString().split("\n"); // fill array with content of syslog-file
 
         // process file content line by line
-          for(i in array) 
+          for(i in array)
           {
             var curLine = array[i];
 
@@ -245,12 +245,12 @@ function initApp()
             console.log("initApp ::: finished reading source file. Amount of rows: "+arrayLogDate.length);
 
 
-        // Creating DataSet 
+        // Creating DataSet
         //
         console.log("initApp ::: Generating dataset for DataTable");
         var dataSet2 = [];
         var arrayLength = arrayLogDate.length;
-        for (var i = 0; i < arrayLength -1; i++) 
+        for (var i = 0; i < arrayLength -1; i++)
         {
           dataSet2.push({id: i, date:arrayLogDate[i], source:arrayLogSrc[i], app:arrayLogApp[i], msg:arrayLogMsg[i]});
       }
@@ -375,7 +375,7 @@ function initApp()
 */
 function initKeyListener()
 {
-    document.addEventListener("keydown", function (e) 
+    document.addEventListener("keydown", function (e)
     {
         console.log("initKeyListener ::: EventListener");
 
@@ -383,7 +383,7 @@ function initKeyListener()
         {
             console.log("initKeyListener ::: Event: KeyPress F12");
             openDevConsole();
-        } 
+        }
         else if (e.which === 116) // F5 = reload
         {
             console.log("initKeyListener ::: Event: KeyPress F5");

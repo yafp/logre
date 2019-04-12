@@ -18,7 +18,9 @@ Please see the [changlog](docs/CHANGELOG.md) for more details.
 ### linux
 #### .deb
 
-```sudo dpkg -i /path/to/local.deb```
+```
+sudo dpkg -i /path/to/local.deb
+```
 
 #### AppImage
 * Copy the AppImage to the desired location
