@@ -1,0 +1,6 @@
+---
+exclude_paths:
+  - '.github/**'
+  - '.github/**/*'
+  - 'docs/**'
+  - 'README.md'

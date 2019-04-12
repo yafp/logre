@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/yafp/logre.svg?branch=master)](https://travis-ci.org/yafp/logre)
+
+
 # logre
 ## about
 logre is a linux logfile reader. Right now it only supports syslog. It is based on electron and uses several javascript libraries to offer some conveniences.
