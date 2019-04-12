@@ -2,5 +2,9 @@
 exclude_paths:
   - '.github/**'
   - '.github/**/*'
+  - 'app/js/datatables/**'
+  - 'app/js/bootstrap/**'
+  - 'app/js/select2/**'
+  - 'app/js/jquery/**'
   - 'docs/**'
   - 'README.md'
