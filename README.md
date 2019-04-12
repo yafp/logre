@@ -14,6 +14,8 @@ Please see the [changlog](docs/CHANGELOG.md) for more details.
 
 
 
+
+
 ## install
 ### linux
 #### .deb
@@ -31,12 +33,16 @@ sudo dpkg -i /path/to/local.deb
 
 
 ## howto
-### execute from cli
-* navigate to main folder
-* execute: ```npm start```
+### setup
+* download from github
+* execute: ```npm install electron```
 
 ### Add electron-builder to devDependencies
 * execute: ```npm install electron-builder --save-dev```
+
+### execute from cli
+* navigate to main folder
+* execute: ```npm start```
 
 ### build from cli
 * navigate to main folder
