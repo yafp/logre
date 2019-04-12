@@ -1,0 +1,128 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px; /* Margin bottom by footer height */
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Set the fixed height of the footer here */
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+/*
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+*/
+
+
+
+
+/* Boxes */
+.boxes {
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+
+
+
+
+.container-fluid {
+   padding: 20px !important;
+}
+
+
+
+
+/* ########################################################################## */
+/* PLANNED FOR SELECTS TO CONFIGURE APP SOURCE FILE*/
+/* ########################################################################## */
+.logreSelects {
+  width:200px;
+}
+
+
+
+
+
+
+#myInputTextField{
+    width:300px;
+}
+
+
+
+
+
+
+/* ########################################################################## */
+/* BACKGROUND-COLORS */
+/* ########################################################################## */
+.m_blueLight {
+    background-color: LightBlue;
+}
+
+.m_blueDark {
+    background-color: CornflowerBlue;
+}
+
+.m_greenLight{
+    background-color: LightGreen;
+}
+
+.m_greenDark{
+    background-color: SeaGreen;
+}
+
+.m_yellowLight{
+    background-color: LightYellow;
+}
+
+.m_yellowDark{
+    background-color: Khaki;
+}
+
+.m_orangeLight{
+    background-color: Coral;
+}
+
+.m_orangeDark{
+    background-color: DarkOrange;
+}
+
+.m_redLight {
+    background-color: IndianRed;
+}
+
+.m_redDark {
+    background-color: FireBrick;
+}
+
+.m_pinkLight {
+    background-color: LightPink;
+}
+
+.m_pinkDark {
+    background-color: PaleVioletRed;
+}
+
+.m_gray {
+    background-color: LightGray;
+}
