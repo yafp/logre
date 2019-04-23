@@ -1,28 +1,21 @@
-[![Build Status](https://travis-ci.org/yafp/logre.svg?branch=master)](https://travis-ci.org/yafp/logre)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/390dae4f9f4443c88f4a836a0d37a9a1)](https://www.codacy.com/app/yafp/logre?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yafp/logre&amp;utm_campaign=Badge_Grade)
-
 # logre
 ## about
 logre is a linux logfile reader. Right now it only supports syslog. It is based on electron and uses several javascript libraries to offer some conveniences.
 
 ## ui
-SCREENSHOT MISSING
+![logo](https://raw.githubusercontent.com/yafp/logre/master/.github/ui_latest.png)
 
 
 ## changelog
-Please see the [changlog](docs/CHANGELOG.md) for more details.
-
-
-
+Please see the [changlog](CHANGELOG.md) for more details.
 
 
 ## install
 ### linux
-#### .deb
 
-```
-sudo dpkg -i /path/to/local.deb
-```
+#### .deb
+* Download the latest .deb
+* execute: ```sudo dpkg -i /path/to/local.deb```
 
 #### AppImage
 * Copy the AppImage to the desired location
@@ -30,21 +23,20 @@ sudo dpkg -i /path/to/local.deb
 * Execute it
 
 #### Snap
+*  execute: ```sudo snap install /path/to/snap```
 
 
 ## howto
-### setup
-* download from github
-* execute: ```npm install electron```
+#### getting started as developer
+* Clone the repository: ```git clone https://github.com/yafp/logre```
+* Go into the repository: ```cd logre```
+* Install dependencies: ```npm install```
+* Run logre: ```npm start```
 
 ### Add electron-builder to devDependencies
 * execute: ```npm install electron-builder --save-dev```
 
-### execute from cli
-* navigate to main folder
-* execute: ```npm start```
-
-### build from cli
+### create builds from cli
 * navigate to main folder
 * execute: ```npm run dist```
 
