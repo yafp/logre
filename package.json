@@ -1,6 +1,6 @@
 {
   "name": "logre",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "A simple syslog reader",
   "main": "main.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "filter"
   ],
   "author": "yafp  <fidel@yafp.de>",
-  "license": "CC0-1.0",
+  "license": "GPL-3.0",
   "build": {
     "productName": "Logre",
     "appId": "logre",
@@ -29,7 +29,8 @@
       "target": [
         "AppImage",
         "deb",
-        "Snap"
+        "Snap",
+        "zip"
       ],
       "executableName": "logre",
       "icon": "build/icons/icon.png",

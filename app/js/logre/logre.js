@@ -9,8 +9,8 @@ function update()
 
     // destroy DataTable
     //
-    //$('#example').DataTable().clear();
-    $('#example').DataTable().destroy();
+    //$("#example").DataTable().clear();
+    $("#example").DataTable().destroy();
     console.log("update ::: Destroyed old DataTable");
 
     // reload data
@@ -56,8 +56,8 @@ function checkDisplaySize()
 
     // resize window
     //
-    const {ipcRenderer} = require('electron');
-    ipcRenderer.send("resize-me-please", windowWidth, windowHeight)
+    const {ipcRenderer} = require("electron");
+    ipcRenderer.send("resize-me-please", windowWidth, windowHeight);
 
     console.log("checkDisplaySize ::: End");
 }
@@ -111,7 +111,7 @@ function checkForSyslogExistance()
 
     if (fs.existsSync(logFile))
     {
-        console.log("checkForSyslogExistance ::: Found logfile: " + logFile);
+        console.log('checkForSyslogExistance ::: Found logfile: ' + logFile);
     }
     else
     {
@@ -122,7 +122,7 @@ function checkForSyslogExistance()
 
         // show  error dialog
         //
-        $("#myModal").modal("show");
+        $('#myModal').modal('show');
         //$('#myModal').modal('toggle');
         //$('#myModal').modal('hide');
     }
@@ -139,8 +139,8 @@ function openURL(url)
 {
     console.log("openURL ::: Start");
 
-    const {shell} = require('electron');
-    console.log('openURL ::: Trying to open the url: ' + url);
+    const {shell} = require("electron");
+    console.log("openURL ::: Trying to open the url: " + url);
     shell.openExternal(url);
 
     console.log("openURL ::: End");
@@ -179,7 +179,7 @@ function initApp()
     console.log("initApp ::: Start");
 
     // init select2
-    $("#logSource").select2();
+    $('#logSource').select2();
 
     // creating empty arrays
     var arrayLogDate = [];
@@ -196,7 +196,7 @@ function initApp()
     var fs = require('fs');
 
     // Asynchronous
-    fs.readFile('/var/log/syslog', function(err, data)
+    fs.readFile("/var/log/syslog", function(err, data)
     {
       if(err) throw err;
 
@@ -210,9 +210,9 @@ function initApp()
                 // example
                 // Apr 10 00:39:01 localhost CRON[1856]: (root) CMD (  [ -x /usr/lib/php/sessionclean ] && if [ ! -d /run/systemd/system ]; then /usr/lib/php/sessionclean; fi)
 
-                var targetPosFirstSplit = nthChar(curLine, ' ', 3);
-                var targetPosSecondSplit = nthChar(curLine, ' ', 4);
-                var targetPosThirdSplit = nthChar(curLine, ' ', 5);
+                var targetPosFirstSplit = nthChar(curLine, " ", 3);
+                var targetPosSecondSplit = nthChar(curLine, " ", 4);
+                var targetPosThirdSplit = nthChar(curLine, " ", 5);
 
                 // split line into several arrays
                 var logDate  = curLine.substr( 0, targetPosFirstSplit );
@@ -273,7 +273,7 @@ function initApp()
 
         dom: 'Brtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            "copy", "csv", "excel", "pdf", "print"
         ],
 
         // pagination
@@ -284,24 +284,24 @@ function initApp()
           "rowCallback": function( row, data )
           {
             // check col: source
-            if ( data['source'] === "localhost" )
+            if ( data.source === "localhost" )
             {
               $("td:eq(2)", row).addClass("m_greenLight");
             }
 
             // check col: msg
-            if ( (data['msg'].toLowerCase().includes("error")) || (data['msg'].toLowerCase().includes("fail")) )
+            if ( (data.msg.toLowerCase().includes("error")) || (data.msg.toLowerCase().includes("fail")) )
             {
               $("td:eq(4)", row).addClass("m_redLight");
             }
             // check col: msg
-            if ( data['msg'].toLowerCase().includes("warning" ))
+            if ( data.msg.toLowerCase().includes("warning" ))
             {
               $("td:eq(4)", row).addClass("m_orangeLight");
             }
 
             // check col: msg
-            if ( data['msg'].toLowerCase().includes("unsupport" ))
+            if ( data.msg.toLowerCase().includes("unsupport" ))
             {
               $("td:eq(4)", row).addClass("m_yellowLight");
             }
@@ -346,10 +346,10 @@ function initApp()
 
 
         // Custom search field for DataTable
-        $('#myInputTextField').keyup(function()
+        $("#myInputTextField").keyup(function()
         {
             table.search($(this).val()).draw() ;
-        })
+        });
 
         console.log("initApp ::: Finished initializing the DataTable");
 
@@ -404,7 +404,7 @@ function openDevConsole()
     console.log("openDevConsole ::: Start");
 
     console.log("openDevConsole ::: Opening Developer Console");
-    const remote = require('electron').remote;
+    const remote = require("electron").remote;
     remote.getCurrentWindow().toggleDevTools();
 
     console.log("openDevConsole ::: End");
@@ -422,7 +422,7 @@ function die()
 
     // quit
     //
-    const remote = require('electron').remote
-    let w = remote.getCurrentWindow()
-    w.close()
+    const remote = require('electron').remote;
+    let w = remote.getCurrentWindow();
+    w.close();
 }

@@ -101,7 +101,7 @@
 
             <select class="logreSelects" id="logSource" name="logSource" disabled>
                 <option value="syslog">/var/log/syslog</option>
-            </select> 
+            </select>
 
             &nbsp;
 
@@ -176,7 +176,7 @@
 <!-- explain the used colors in column msg -->
 <div class="row">
   <div class="col">
-  
+
       <span class="boxes m_redLight text-center" title="Pattern: error, fail"></span>
       <span class="boxes m_orangeLight text-center" title="Pattern: warning"></span>
       <span class="boxes m_yellowLight text-center" title="Pattern: Unsupported"></span>
@@ -190,7 +190,7 @@
 <!-- footer -->
 <footer class="footer">
     <div class="container text-center">
-      <span class="text-muted"> 
+      <span class="text-muted">
 
         <!-- app name and version -->
         <script>
@@ -214,13 +214,19 @@
       // You can also require other files to run in this process
       require('../renderer.js')
 
-      $(document).ready(function() 
+      $(document).ready(function()
       {
         console.log("on ready ::: Start");
 
         initApp();
         initKeyListener();
         checkRequirements();
+
+        $('#myModal').on('hidden.bs.modal', function () {
+            // do something…
+            die();
+
+        })
 
         console.log("on ready ::: Start");
     });
