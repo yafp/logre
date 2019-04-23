@@ -1,7 +1,7 @@
 # logre
 ## changelog
 
-### logre 0.9.0
+### logre 1.0.0
 ####  ```Added```
 * Initial version
 * Electron: 4.1.4
@@ -17,12 +17,12 @@
 * F5 reloads all log entries
 * window size and position is handled on launch
 * detects operating system on launch
-* checks if /var/logsyslog exists
+* checks if /var/log/syslog exists
 
 
 
-## Info
-### Versioning
+
+## Versioning
 
   ```
   MAJOR.MINOR.PATCH
@@ -31,8 +31,6 @@
 * ```MAJOR``` version (incompatible API changes etc)
 * ```MINOR``` version (adding functionality)
 * ```PATCH``` version (bug fixes)
-
-Versioning and Changelog started with version 4.
 
 
 ### Categories
