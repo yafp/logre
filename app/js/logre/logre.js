@@ -9,8 +9,8 @@ function checkForNewLogreRelease()
 
     var remoteAppVersionLatest = "0.0.0";
 
-    var gitHubPath = 'yafp/logre';  // example repo
-    var url = 'https://api.github.com/repos/' + gitHubPath + '/tags';
+    var gitHubPath = "yafp/logre";  // example repo
+    var url = "https://api.github.com/repos/" + gitHubPath + "/tags";
 
     $.get(url).done(function (data)
     {
@@ -26,7 +26,7 @@ function checkForNewLogreRelease()
         var remoteAppVersionLatest = versions[0].name;
 
         // get local version
-        var localAppVersion = require('electron').remote.app.getVersion();
+        var localAppVersion = require("electron").remote.app.getVersion();
 
         console.log("checkForNewLogreRelease ::: Local version: " + localAppVersion);
         console.log("checkForNewLogreRelease ::: Latest public version: " +remoteAppVersionLatest);
@@ -39,7 +39,7 @@ function checkForNewLogreRelease()
             $('#updateInformation').html('logre ' + remoteAppVersionLatest + ' is now available. See <a href="" onClick=\'openURL("https://github.com/yafp/logre/blob/master/CHANGELOG.md")\'>Changelog</a> for details. Download is available <a href="" onClick=\'openURL("https://github.com/yafp/logre/releases")\'>here</a>.');
 
             // show update information
-            $('#updateInformation').show();
+            $("#updateInformation").show();
         }
         else
         {
@@ -74,7 +74,7 @@ function checkSupportedOperatingSystem()
 
         // show  error dialog
         //
-        $('#myModal').modal('show');
+        $("#myModal").modal("show");
         //$('#myModal').modal('toggle');
         //$('#myModal').modal('hide');
 
