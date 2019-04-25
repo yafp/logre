@@ -8,3 +8,4 @@ exclude_paths:
   - 'app/js/jquery/**'
   - 'docs/**'
   - 'README.md'
+  - 'CHANGELOG.md'

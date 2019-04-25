@@ -1,7 +1,26 @@
 # logre
 ## changelog
 
-### logre 1.0.0
+### logre 1.1.0 (20190xyy)
+####  ```Added```
+* Added link to releases to help menu
+* Added update-check on startup
+* Added placeholder text to search field
+* Added new pattern 'unable' to msg coloring
+* Added a basic jsdoc based documentation for the logre javascript code
+
+#### ```Changed```
+* Optimized console.log usage
+
+#### ```Removed```
+* Removed print option from DataTable Buttons
+
+#### ```Fixed```
+* Several minor fixes based on codacy warnings
+* Fixed previously not display app icon in window title and dock (tested for .deb only)
+
+
+### logre 1.0.0 (20190423)
 ####  ```Added```
 * Initial version
 * Electron: 4.1.4

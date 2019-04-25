@@ -51,6 +51,9 @@
   <!-- 4.0.5 -->
   <script src="js/select2/4.0.5/js/select2.min.js"></script>
 
+  <!-- semver-->
+  <script src="js/semver/semver.min.js"></script>
+
   <!-- logre-->
   <script src="js/logre/logre.js"></script>
 
@@ -83,6 +86,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" onclick="openURL('https://github.com/yafp/logre/issues');">Issues</a>
                 <a class="dropdown-item" onclick="openURL('https://github.com/yafp/logre');">Code</a>
+                <a class="dropdown-item" onclick="openURL('https://github.com/yafp/logre/releases');">Releases</a>
                 <a class="dropdown-item" onclick="openURL('https://github.com/yafp/logre/blob/master/docs/CHANGELOG.md');">Changelog</a>
                 <a class="dropdown-item" onclick="openURL('https://github.com/yafp/logre/blob/master/LICENSE');">License</a>
                 <div class="dropdown-divider"></div>
@@ -105,7 +109,7 @@
 
             &nbsp;
 
-            <input type="search" class="form-control" id="myInputTextField">
+            <input type="search" class="form-control" id="myInputTextField" placeholder="search">
 
             &nbsp;
 
@@ -116,6 +120,13 @@
     </div>
 </nav>
 <!-- /navigation -->
+
+
+<!-- update information -->
+<div class="alert alert-success" role="alert" id="updateInformation">
+    checking for updates
+</div>
+<!-- update information -->
 
 
 
@@ -176,16 +187,17 @@
 <!-- explain the used colors in column msg -->
 <div class="row">
   <div class="col">
-
       <span class="boxes m_redLight text-center" title="Pattern: error, fail"></span>
-      <span class="boxes m_orangeLight text-center" title="Pattern: warning"></span>
-      <span class="boxes m_yellowLight text-center" title="Pattern: Unsupported"></span>
+      <span class="boxes m_orangeLight text-center" title="Pattern: warning, unable"></span>
+      <span class="boxes m_yellowLight text-center" title="Pattern: unsupported"></span>
   </div>
 </div>
 
-
 </div>
 <!-- /container / content -->
+
+
+
 
 <!-- footer -->
 <footer class="footer">
@@ -205,6 +217,7 @@
       and <span class="badge badge-secondary">Electron <script>document.write(process.versions.electron)</script></span>.
   </span>
 
+
 </div>
 </footer>
 <!-- /footer -->
@@ -218,14 +231,22 @@
       {
         console.log("on ready ::: Start");
 
-        initApp();
-        initKeyListener();
+        // hide update notifier
+        $('#updateInformation').hide();
+
+
         checkRequirements();
+        keyListener();
+        initApp();
+        checkForNewLogreRelease();
 
-        $('#myModal').on('hidden.bs.modal', function () {
-            // do something…
+        // make all select to select2
+        //$('.logreSelects').select2();
+
+        // if modal error/warning is displayed and confirmed by user -> die
+        $('#myModal').on('hidden.bs.modal', function ()
+        {
             die();
-
         })
 
         console.log("on ready ::: Start");
