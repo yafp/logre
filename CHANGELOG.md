@@ -1,7 +1,13 @@
 # logre
 ## changelog
 
-### logre 1.1.0 (20190xyy)
+
+### logre 1.x.y (2019xxyy) CUR DEV
+#### ```Removed```
+* Removed some unused icon image files
+
+
+### logre 1.1.0 (20190425)
 ####  ```Added```
 * Added link to releases to help menu
 * Added update-check on startup

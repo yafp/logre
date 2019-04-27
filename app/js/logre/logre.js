@@ -9,7 +9,7 @@ function checkForNewLogreRelease()
 
     var remoteAppVersionLatest = "0.0.0";
 
-    var gitHubPath = "yafp/logre";  // example repo
+    var gitHubPath = "yafp/logre";  // user/repo
     var url = "https://api.github.com/repos/" + gitHubPath + "/tags";
 
     $.get(url).done(function (data)
@@ -18,9 +18,6 @@ function checkForNewLogreRelease()
         {
             return semver.compare(v2.name, v1.name);
         });
-
-        // show in UI
-        //$('#result').html(versions[0].name);
 
         // get remote version
         var remoteAppVersionLatest = versions[0].name;
@@ -73,10 +70,7 @@ function checkSupportedOperatingSystem()
         $( ".errorText" ).append( "<p>" + userPlatform + " is currently not supported.</p>" );
 
         // show  error dialog
-        //
         $("#myModal").modal("show");
-        //$('#myModal').modal('toggle');
-        //$('#myModal').modal('hide');
 
         console.error("checkSupportedOperatingSystem ::: Operating system " + userPlatform + " is not supported." );
     }
@@ -111,10 +105,7 @@ function checkForSyslogExistance()
         $( ".errorText" ).append("<p>Unable to find " + logFile + ".</p>" );
 
         // show  error dialog
-        //
         $("#myModal").modal("show");
-        //$("#myModal").modal("toggle");
-        //$("#myModal").modal("hide");
     }
 
     console.log("checkForSyslogExistance ::: End");
@@ -142,7 +133,6 @@ function initApp()
     // Read from file
     //
     // source: https://stackoverflow.com/questions/6831918/node-js-read-a-text-file-into-an-array-each-line-an-item-in-the-array
-    //
 
     // requirement to read from file
     var fs = require("fs");
@@ -155,88 +145,88 @@ function initApp()
     /*
     var array = fs.readFileSync('file.txt').toString().split("\n");
     for(i in array) {
-        console.log(array[i]);
-    }
-    */
+    console.log(array[i]);
+}
+*/
 
-    // Asynchronous
-    fs.readFile(syslogLocation, function(err, data)
+// Asynchronous
+fs.readFile(syslogLocation, function(err, data)
+{
+    if(err)
     {
-      if(err)
-      {
-          throw err;
-      }
+        throw err;
+    }
 
-      var array = data.toString().split("\n"); // fill array with content of syslog-file
+    var array = data.toString().split("\n"); // fill array with content of syslog-file
 
-        // process file content line by line
-          for(i in array)
-          {
-            var curLine = array[i];
+    // process file content line by line
+    for(i in array)
+    {
+        var curLine = array[i];
 
-                // example
-                // Apr 10 00:39:01 localhost CRON[1856]: (root) CMD (  [ -x /usr/lib/php/sessionclean ] && if [ ! -d /run/systemd/system ]; then /usr/lib/php/sessionclean; fi)
+        // example
+        // Apr 10 00:39:01 localhost CRON[1856]: (root) CMD (  [ -x /usr/lib/php/sessionclean ] && if [ ! -d /run/systemd/system ]; then /usr/lib/php/sessionclean; fi)
 
-                var targetPosFirstSplit = nthChar(curLine, " ", 3);
-                var targetPosSecondSplit = nthChar(curLine, " ", 4);
-                var targetPosThirdSplit = nthChar(curLine, " ", 5);
+        var targetPosFirstSplit = nthChar(curLine, " ", 3);
+        var targetPosSecondSplit = nthChar(curLine, " ", 4);
+        var targetPosThirdSplit = nthChar(curLine, " ", 5);
 
-                // split line into several arrays
-                var logDate  = curLine.substr( 0, targetPosFirstSplit );
-                var logSrc = curLine.substr( targetPosFirstSplit +1, (targetPosSecondSplit - targetPosFirstSplit -1) );
-                var logApp = curLine.substr( targetPosSecondSplit +1, targetPosThirdSplit - targetPosSecondSplit );
-                // clean logApp
-                // default value looks like that: cron[PID]:
-                // target looks like: cron
-                var targetPosPIDSplit = nthChar(logApp, "[", 1);
-                logApp = logApp.substr(0, targetPosPIDSplit);
+        // split line into several arrays
+        var logDate  = curLine.substr( 0, targetPosFirstSplit );
+        var logSrc = curLine.substr( targetPosFirstSplit +1, (targetPosSecondSplit - targetPosFirstSplit -1) );
+        var logApp = curLine.substr( targetPosSecondSplit +1, targetPosThirdSplit - targetPosSecondSplit );
+        // clean logApp
+        // default value looks like that: cron[PID]:
+        // target looks like: cron
+        var targetPosPIDSplit = nthChar(logApp, "[", 1);
+        logApp = logApp.substr(0, targetPosPIDSplit);
 
-                var logMsg = curLine.substr( targetPosThirdSplit +1);
+        var logMsg = curLine.substr( targetPosThirdSplit +1);
 
-                // add values to specific array
-                arrayLogDate.push(logDate);
-                arrayLogSrc.push(logSrc);
-                arrayLogApp.push(logApp);
-                arrayLogMsg.push(logMsg);
+        // add values to specific array
+        arrayLogDate.push(logDate);
+        arrayLogSrc.push(logSrc);
+        arrayLogApp.push(logApp);
+        arrayLogMsg.push(logMsg);
 
-                // logging
-                //
-                //console.log(logDate);
-                //console.log(logSrc);
-                //console.log('_'+logSrc+'_');
-                //console.log(logMsg);
-                //console.log("--");
-                //console.error(arrayLogDate.length);
-            }
-
-            console.log("initApp ::: finished reading source file. Amount of rows: "+arrayLogDate.length);
-
-
-        // Creating DataSet
+        // logging
         //
-        console.log("initApp ::: Generating dataset for DataTable");
-        var dataSet2 = [];
-        var arrayLength = arrayLogDate.length;
-        for (var i = 0; i < arrayLength -1; i++)
-        {
-          dataSet2.push({id: i, date:arrayLogDate[i], source:arrayLogSrc[i], app:arrayLogApp[i], msg:arrayLogMsg[i]});
-      }
-      console.log("initApp ::: Finished generating dataset for DataTable");
+        //console.log(logDate);
+        //console.log(logSrc);
+        //console.log('_'+logSrc+'_');
+        //console.log(logMsg);
+        //console.log("--");
+        //console.error(arrayLogDate.length);
+    }
+
+    console.log("initApp ::: finished reading source file. Amount of rows: "+arrayLogDate.length);
 
 
-        // init datatable
-        //
-        //$('#example').DataTable();
-        var table = $("#example").DataTable( {
-          "order": [[ 0, "desc" ]], // order based on ID
-          data: dataSet2,
-          columns: [
-          { data: "id" },
-          { data: "date" },
-          { data: "source" },
-          { data: "app" },
-          { data: "msg" }
-          ],
+    // Creating DataSet
+    //
+    console.log("initApp ::: Generating dataset for DataTable");
+    var dataSet2 = [];
+    var arrayLength = arrayLogDate.length;
+    for (var i = 0; i < arrayLength -1; i++)
+    {
+        dataSet2.push({id: i, date:arrayLogDate[i], source:arrayLogSrc[i], app:arrayLogApp[i], msg:arrayLogMsg[i]});
+    }
+    console.log("initApp ::: Finished generating dataset for DataTable");
+
+
+    // init datatable
+    //
+    //$('#example').DataTable();
+    var table = $("#example").DataTable( {
+        "order": [[ 0, "desc" ]], // order based on ID
+        data: dataSet2,
+        columns: [
+            { data: "id" },
+            { data: "date" },
+            { data: "source" },
+            { data: "app" },
+            { data: "msg" }
+        ],
 
         dom: "Brtip",
         buttons: [
@@ -246,31 +236,31 @@ function initApp()
         // pagination
         "pagingType": "numbers",
 
-          // colorize the different event-types
-          //
-          "rowCallback": function( row, data )
-          {
+        // colorize the different event-types
+        //
+        "rowCallback": function( row, data )
+        {
             // check col: source
             if ( data.source === "localhost" )
             {
-              $("td:eq(2)", row).addClass("m_greenLight");
+                $("td:eq(2)", row).addClass("m_greenLight");
             }
 
             // check col: msg -> in red
             if ( (data.msg.toLowerCase().includes("error")) || (data.msg.toLowerCase().includes("fail")) )
             {
-              $("td:eq(4)", row).addClass("m_redLight");
+                $("td:eq(4)", row).addClass("m_redLight");
             }
             // check col: msg -> in orange
             if ( data.msg.toLowerCase().includes("warning" ) || (data.msg.toLowerCase().includes("unable")) )
             {
-              $("td:eq(4)", row).addClass("m_orangeLight");
+                $("td:eq(4)", row).addClass("m_orangeLight");
             }
 
             // check col: msg -> in yellow
             if ( data.msg.toLowerCase().includes("unsupport" ))
             {
-              $("td:eq(4)", row).addClass("m_yellowLight");
+                $("td:eq(4)", row).addClass("m_yellowLight");
             }
         },
         // end colorize
@@ -287,42 +277,40 @@ function initApp()
             columns = [2, 3]; // Add columns here
             this.api().columns(columns).every(function ()
             {
-              var column = this;
-              var select = $('<select class="logreSelects"><option value=""></option></select>')
-              .appendTo( $(column.footer()).empty() )
-              .on( 'change', function ()
-              {
-                var val = $.fn.dataTable.util.escapeRegex(
-                  $(this).val()
-                  );
+                var column = this;
+                var select = $('<select class="logreSelects"><option value=""></option></select>')
+                .appendTo( $(column.footer()).empty() )
+                .on( 'change', function ()
+                {
+                    var val = $.fn.dataTable.util.escapeRegex(
+                        $(this).val()
+                    );
 
-                column.search( val ? '^'+val+'$' : '', true, false ).draw();
-            } );
+                    column.search( val ? '^'+val+'$' : '', true, false ).draw();
+                } );
 
-              column.data().unique().sort().each( function ( d, j )
-              {
-                select.append( '<option value="'+d+'">'+d+'</option>' );
+                column.data().unique().sort().each( function ( d, j )
+                {
+                    select.append( '<option value="'+d+'">'+d+'</option>' );
+                } );
             } );
-          } );
         }
         // End Dropdown for columns
-
-
 
     } );
 
 
-        // Custom search field for DataTable
-        $("#myInputTextField").keyup(function()
-        {
-            table.search($(this).val()).draw() ;
-        });
-
-        console.log("initApp ::: Finished initializing the DataTable");
-
+    // Custom search field for DataTable
+    $("#myInputTextField").keyup(function()
+    {
+        table.search($(this).val()).draw() ;
     });
 
-    console.log("initApp ::: End");
+    console.log("initApp ::: Finished initializing the DataTable");
+
+});
+
+console.log("initApp ::: End");
 }
 
 
@@ -336,12 +324,10 @@ function update()
     console.log("update ::: Start");
 
     // destroy DataTable
-    //
-    //$("#example").DataTable().clear();
     $("#example").DataTable().destroy();
     console.log("update ::: Destroyed old DataTable");
 
-    // reload data
+    // reload data & re-init Datatable
     initApp();
 
     console.log("update ::: End");
@@ -425,10 +411,10 @@ function nthChar(string, character, n)
     var count= 0, i=0;
     while(count<n && (i=string.indexOf(character,i)+1))
     {
-      count++;
-  }
-  if(count === n) return i-1;
-  return NaN;
+        count++;
+    }
+    if(count === n) return i-1;
+    return NaN;
 }
 
 
