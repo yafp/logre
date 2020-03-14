@@ -2,8 +2,27 @@
 ## changelog
 
 
-### logre 1.x.y (2019xxyy) CUR DEV
+### logre 1.2.0 (2019xxyy) CUR DEV
+#### ```Added```
+* Added about window
+* Dependencies
+  * Added standardx 5.0.0
+  * Added snazzy 8.0.0
+  * Added about-window 1.13.2
+  * Added noty 3.2.0-beta
+  * Added popper.js 1.16.1
+  * Added animate.css 3.7.2
+
+#### ```Changed```
+* Dependencies
+  * Updated electrom from 4.2.12 to 8.1.1
+  * updated electron-builder from 20.44.4 to 22.4.1
+* Js Libraries
+  * Bootstrap is now installed using npm
+  * jQuery is now installed using npm
+
 #### ```Removed```
+* Removed the footer
 * Removed some unused icon image files
 
 
