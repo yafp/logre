@@ -1,10 +1,12 @@
 {
   "name": "logre",
-  "version": "1.1.1",
+  "version": "1.1.20200314",
   "description": "A simple syslog reader",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "standardx": "standardx --verbose | snazzy",
+    "standardx-fix": "standardx --fix --verbose | snazzy",
     "pack": "build --dir",
     "dist": "build"
   },
@@ -38,9 +40,25 @@
       "category": "System"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "about-window": "^1.13.2",
+    "animate.css": "^3.7.2",
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "noty": "^3.2.0-beta",
+    "popper.js": "^1.16.1"
+  },
   "devDependencies": {
-    "electron": "^4.1.4",
-    "electron-builder": "^20.39.0"
+    "electron": "^8.1.1",
+    "electron-builder": "^22.4.1",
+    "snazzy": "^8.0.0",
+    "standardx": "^5.0.0"
+},
+"standardx": {
+    "ignore": [
+      "/dist",
+      "/docs/jsdocs",
+      "/test/spec.js"
+    ]
   }
 }
