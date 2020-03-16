@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
 
     steps:
       - name: Check out Git repository
@@ -34,7 +34,7 @@ jobs:
       - name: apt-update
         if: startsWith(matrix.os, 'ubuntu-latest')
         run: sudo apt-get update
-        
+
       - name: autoremove
         if: startsWith(matrix.os, 'ubuntu-latest')
         run: sudo apt autoremove
@@ -45,7 +45,7 @@ jobs:
 
       - name: Install snapcraft
         if: startsWith(matrix.os, 'ubuntu-latest')
-        run: sudo snap install snapcraft --classic 
+        run: sudo snap install snapcraft --classic
 
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
