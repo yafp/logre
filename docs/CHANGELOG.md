@@ -5,18 +5,24 @@
 ### logre 1.2.0 (2019xxyy) CUR DEV
 #### ```Added```
 * Added about window
-* Dependencies
+* Added support for journalctl
+
+
+#### ```Changed```
+* Dependencies (updated)
+  * Updated electrom from 4.2.12 to 8.1.1
+  * updated electron-builder from 20.44.4 to 22.4.1
+* Dependencies (new)
   * Added standardx 5.0.0
   * Added snazzy 8.0.0
   * Added about-window 1.13.2
   * Added noty 3.2.0-beta
   * Added popper.js 1.16.1
   * Added animate.css 3.7.2
-
-#### ```Changed```
-* Dependencies
-  * Updated electrom from 4.2.12 to 8.1.1
-  * updated electron-builder from 20.44.4 to 22.4.1
+  * Added electron-log 4.1.0
+  * Added journalctl
+  * Added fontAwesome
+  * Added which
 * Js Libraries
   * Bootstrap is now installed using npm
   * jQuery is now installed using npm
