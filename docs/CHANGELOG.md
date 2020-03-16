@@ -1,12 +1,39 @@
-# logre
-## changelog
+<p align="center">
+  <a href="#"><img src="https://raw.githubusercontent.com/yafp/logre/master/.github/images/logo/128x128.png" width="128"></a>
+</p>
 
+<div align="center">
+  <h1>logre</h1>
+  <h2>changelog</h2>
+
+</div>
+
+
+This project is using [Semantic Versioning](https://semver.org/).
+
+  ```
+  MAJOR.MINOR.PATCH
+  ```
+
+* ```MAJOR``` version (incompatible API changes etc)
+* ```MINOR``` version (adding functionality)
+* ```PATCH``` version (bug fixes)
+
+The following categories are used:
+
+* ```Added```: for new features
+* ```Changed```: for changes in existing functionality.
+* ```Deprecated```: for soon-to-be removed features.
+* ```Removed```: for now removed features.
+* ```Fixed```: for any bug fixes.
+* ```Security```: in case of vulnerabilities.
+
+***
 
 ### logre 1.2.0 (2019xxyy) CUR DEV
 #### ```Added```
 * Added about window
 * Added support for journalctl
-
 
 #### ```Changed```
 * Dependencies (updated)
@@ -31,6 +58,7 @@
 * Removed the footer
 * Removed some unused icon image files
 
+***
 
 ### logre 1.1.0 (20190425)
 ####  ```Added```
@@ -50,6 +78,7 @@
 * Several minor fixes based on codacy warnings
 * Fixed previously not display app icon in window title and dock (tested for .deb only)
 
+***
 
 ### logre 1.0.0 (20190423)
 ####  ```Added```
@@ -68,25 +97,3 @@
 * window size and position is handled on launch
 * detects operating system on launch
 * checks if /var/log/syslog exists
-
-
-
-
-## Versioning
-
-  ```
-  MAJOR.MINOR.PATCH
-  ```
-
-* ```MAJOR``` version (incompatible API changes etc)
-* ```MINOR``` version (adding functionality)
-* ```PATCH``` version (bug fixes)
-
-
-### Categories
-* ```Added```: for new features
-* ```Changed```: for changes in existing functionality.
-* ```Deprecated```: for soon-to-be removed features.
-* ```Removed```: for now removed features.
-* ```Fixed```: for any bug fixes.
-* ```Security```: in case of vulnerabilities.

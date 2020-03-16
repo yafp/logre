@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Logre</title>
+    <meta charset="UTF-8">
+    <title>Logre</title>
 
-  <!-- Required meta tags -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <script>
+    <script>
         if (typeof module === 'object') {
             window.module = module;
             module = undefined;
@@ -27,38 +27,36 @@
     <!-- animate.css -->
     <link rel="stylesheet" href="../node_modules/animate.css/animate.min.css">
 
-  <!-- logre -->
-  <link rel="stylesheet" href="css/logre/logre.css"  />
+    <!-- logre -->
+    <link rel="stylesheet" href="css/logre/logre.css"  />
 
-  <!-- bootstrap -->
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
 
-  <!-- fontawesome -->
-<script src="../node_modules/@fortawesome/fontawesome-free/js/all.min.js" defer></script>
+    <!-- fontawesome -->
+    <script src="../node_modules/@fortawesome/fontawesome-free/js/all.min.js" defer></script>
 
-  <!-- DataTables -->
-  <!-- 1.10.18 -->
-  <link rel="stylesheet" href="js/datatables/1.10.18/datatables.min.css"  />
-  <link rel="stylesheet" href="js/datatables/1.10.18/Buttons-1.5.6/css/buttons.dataTables.min.css"  />
-  <!-- DataTables -->
-  <!-- 1.10.18 -->
-  <script src="js/datatables/1.10.18/datatables.js"></script>
-  <script src="js/datatables/1.10.18/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
-  <script src="js/datatables/1.10.18/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-  <script src="js/datatables/1.10.18/Buttons-1.5.6/js/buttons.print.min.js"></script>
-  <script src="js/datatables/1.10.18/Buttons-1.5.6/js/buttons.flash.js"></script>
-  <script src="js/datatables/1.10.18/pdfmake-0.1.36/pdfmake.min.js"></script>
-  <script src="js/datatables/1.10.18/pdfmake-0.1.36/vfs_fonts.js"></script>
-  <script src="js/datatables/1.10.18/JSZip-2.5.0/jszip.min.js"></script>
+    <!-- DataTables -->
+    <!-- 1.10.18 -->
+    <link rel="stylesheet" href="js/datatables/1.10.18/datatables.min.css"  />
+    <link rel="stylesheet" href="js/datatables/1.10.18/Buttons-1.5.6/css/buttons.dataTables.min.css"  />
+    <script src="js/datatables/1.10.18/datatables.js"></script>
+    <script src="js/datatables/1.10.18/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
+    <script src="js/datatables/1.10.18/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+    <script src="js/datatables/1.10.18/Buttons-1.5.6/js/buttons.print.min.js"></script>
+    <script src="js/datatables/1.10.18/Buttons-1.5.6/js/buttons.flash.js"></script>
+    <script src="js/datatables/1.10.18/pdfmake-0.1.36/pdfmake.min.js"></script>
+    <script src="js/datatables/1.10.18/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="js/datatables/1.10.18/JSZip-2.5.0/jszip.min.js"></script>
 
-  <!-- select 2 -->
-  <!-- 4.0.5 -->
-  <link rel="stylesheet" href="js/select2/4.0.5/css/select2.min.css"  />
-  <script src="js/select2/4.0.5/js/select2.min.js"></script>
+    <!-- select 2 -->
+    <!-- 4.0.5 -->
+    <link rel="stylesheet" href="js/select2/4.0.5/css/select2.min.css"  />
+    <script src="js/select2/4.0.5/js/select2.min.js"></script>
 
-  <!-- semver-->
-  <script src="js/semver/semver.min.js"></script>
+    <!-- semver-->
+    <script src="js/semver/semver.min.js"></script>
 </head>
 
 
@@ -67,8 +65,7 @@
     <!-- empty line -->
     <!--
         <div class="row-fluid row-empty">&nbsp;</div>
-      -->
-
+    -->
 
     <!-- update information -->
     <div class="alert alert-success" role="alert" id="updateInformation">
@@ -77,28 +74,26 @@
     <!-- update information -->
 
 
+    <!-- container / content -->
+    <div id="mainContainer" class="container-fluid logre_nonSelectableText">
 
-
-
-
-<!-- container / content -->
-<div id="mainContainer" class="container-fluid logre_nonSelectableText">
-
-    <!-- Tabs -->
-    <div class="row-fluid">
-        <div class="nav nav-tabs" id="pills-tab" role="tablist">
-            <a class="nav-item nav-link active" id="navTabHome" data-toggle="tab" href="#tabHome" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-home"></i> Home</a>
-            <a class="nav-item nav-link" id="navTabSyslog" data-toggle="tab" href="#tabSyslog" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-list"></i> syslog</a>
-            <a class="nav-item nav-link" id="navTabJournalCtl" data-toggle="tab" href="#tabJournalCtl" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-list-ul"></i> journalctl</a>
+        <!-- Tabs -->
+        <div class="row-fluid">
+            <div class="nav nav-tabs" id="pills-tab" role="tablist">
+                <a class="nav-item nav-link active" id="navTabHome" data-toggle="tab" href="#tabHome" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-home"></i> Home</a>
+                <a class="nav-item nav-link" id="navTabSyslog" data-toggle="tab" href="#tabSyslog" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-list"></i> syslog</a>
+                <a class="nav-item nav-link" id="navTabJournalCtl" data-toggle="tab" href="#tabJournalCtl" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-list-ul"></i> journalctl</a>
+            </div>
         </div>
-    </div>
-    <!-- /Tabs -->
+        <!-- /Tabs -->
 
-    <!-- tabs content -->
+        <!-- tabs content -->
         <div class="tab-content">
 
             <!-- Tab: overview -->
             <div class="tab-pane active" id="tabHome" role="tabpanel">
+
+                <div class="row">
 
                 <!-- syslog -->
                 <div id="homeSyslog" class="homeService border">
@@ -115,13 +110,18 @@
                 </div>
                 <!-- /journalctl -->
 
+                </div>
+
             </div>
             <!-- /Tab: overview -->
 
 
             <!-- Tab: syslog -->
             <div class="tab-pane" id="tabSyslog" role="tabpanel">
-               <button class="btn btn-outline-success float-right" onClick="syslogLoad();">Update</button>
+
+                <div class="row-fluid row-empty">&nbsp;</div>
+
+                <button class="btn btn-outline-success float-right" onClick="syslogLoad();">Update</button>
                 <!-- DataTable -->
                 <table id="example" class="display" style="width:100%">
                     <thead>
@@ -160,6 +160,9 @@
 
             <!-- Tab: journalctl -->
             <div class="tab-pane" id="tabJournalCtl" role="tabpanel">
+
+                <div class="row-fluid row-empty">&nbsp;</div>
+
                 <!-- DataTable -->
                 <table id="dtJournalCtl" class="display" style="width:100%">
                     <thead>
@@ -190,31 +193,31 @@
             </div>
             <!-- /Tab: journalctl -->
         </div>
-    <!-- /tabs content -->
+        <!-- /tabs content -->
 
-</div>
-<!-- /container / content -->
+    </div>
+    <!-- /container / content -->
 
 
     <!-- You can also require other files to run in this process -->
     <script src="js/renderer.js"></script>
 
 
-<script>
-      // You can also require other files to run in this process
-      $(document).ready(function()
-      {
-        console.log("on ready ::: Start");
-        titlebarInit()
-        checkRequirements();
-        $('#updateInformation').hide(); // hide update notifier
-        checkForNewLogreRelease();
-        // make all select to select2
-        //$('.logreSelects').select2();
-        console.log("on ready ::: End");
-    });
+    <script>
+        // You can also require other files to run in this process
+        $(document).ready(function()
+        {
+            console.log("on ready ::: Start");
+            titlebarInit()
+            checkRequirements();
+            $('#updateInformation').hide(); // hide update notifier
+            checkForNewLogreRelease();
+            // make all select to select2
+            //$('.logreSelects').select2();
+            console.log("on ready ::: End");
+        });
 
-</script>
+    </script>
 
 </body>
 </html>
