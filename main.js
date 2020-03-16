@@ -1,9 +1,7 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, Menu } = require('electron')
 const shell = require('electron').shell
-
 const openAboutWindow = require('about-window').default // for: about-window
-
 const { urlGitHubGeneral, urlGitHubIssues, urlGitHubChangelog, urlGitHubReleases } = require('./app/js/modules/githubUrls.js') // project-urls
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -11,16 +9,17 @@ const { urlGitHubGeneral, urlGitHubIssues, urlGitHubChangelog, urlGitHubReleases
 let mainWindow
 
 var path = require('path') // needed for icon-handling
-
 var iconPath = path.join(__dirname, '/app/img/icon/icon.png')
 
 function createWindow () {
     // Create the browser window.
     mainWindow = new BrowserWindow({
+        frame: false, // false results in a borderless window. Needed for custom titlebar
+        titleBarStyle: 'hidden', // needed for custom-electron-titlebar. See: https://electronjs.org/docs/api/frameless-window
         width: 1000,
         height: 1000,
         resizable: true, // false = not resizeable
-        frame: true, // false = no title bar and borders
+        show: false, // show when ready-to-show
         // icon: __dirname + "build/icons",
         icon: iconPath,
         webPreferences:
@@ -39,6 +38,12 @@ function createWindow () {
 
     // Open the DevTools. (manual trigger via: CTRL + SHIFT + I)
     // mainWindow.webContents.openDevTools()
+
+    mainWindow.on('ready-to-show', function () {
+        mainWindow.show()
+        mainWindow.focus()
+        mainWindow.webContents.send('checkThingsOnceAtStart')
+    })
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
