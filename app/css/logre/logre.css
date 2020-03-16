@@ -1,34 +1,11 @@
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+
 }
 body {
-  margin-bottom: 60px; /* Margin bottom by footer height */
+
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 60px; /* Set the fixed height of the footer here */
-  line-height: 60px; /* Vertically center the text there */
-  background-color: #f5f5f5;
-}
-
-
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
-/*
-.container {
-  width: auto;
-  max-width: 680px;
-  padding: 0 15px;
-}
-*/
-
-
 
 
 /* Boxes */
@@ -42,30 +19,77 @@ body {
 
 
 
-
-
 .container-fluid {
    padding: 20px !important;
 }
 
 
+/* ########################################################################## */
+/* THE MAIN UI WINDOW CONTAINER */
+/* ########################################################################## */
+#mainContainer{
+    animation-delay: 0.5s; /* custom animation delay */
+}
 
 
 /* ########################################################################## */
-/* PLANNED FOR SELECTS TO CONFIGURE APP SOURCE FILE*/
+/* UI TEXT - MAKE THEM NOT SELECTABLE */
 /* ########################################################################## */
-.logreSelects {
-  width:200px;
+.logre_nonSelectableText {
+    -webkit-user-select:none;
+    -moz-user-select: none;
+}
+
+
+/* ########################################################################## */
+/* CUSTOM-TITLEBAR */
+/* ########################################################################## */
+.window-title{
+    font-size: 13px !important;
+}
+
+
+/* ########################################################################## */
+/* WINDOW BORDER - after custom-titlebar */
+/* ########################################################################## */
+.container-after-titlebar{
+    border-left: 1px solid #171717;
+    border-right: 1px solid #171717;
+    border-bottom: 1px solid #171717;
+}
+
+
+
+
+/* ########################################################################## */
+/* ROW EMPTY */
+/* ########################################################################## */
+.row-empty{
+    height: 20px;
+}
+
+
+
+
+/* ########################################################################## */
+/* NAV COLOR ON TABS */
+/* ########################################################################## */
+.nav-link{
+    color: gray;
+}
+
+.nav-link:hover{
+    color: #c0392b;
+}
+
+.nav-item.nav-link.active{
+    color: #c0392b;
 }
 
 
 
 
 
-
-#myInputTextField{
-    width:300px;
-}
 
 
 
@@ -125,4 +149,21 @@ body {
 
 .m_gray {
     background-color: LightGray;
+}
+
+
+
+
+
+.homeService{
+  margin: 10px;
+  padding: 50px;
+  /*
+  border-style: solid;
+  border-color: gray;
+  border-width: 1px;
+  */
+  width: 200px;
+  height: 200px;
+  text-align: center;
 }
