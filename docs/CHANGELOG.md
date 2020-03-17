@@ -30,7 +30,7 @@ The following categories are used:
 
 ***
 
-### logre 1.2.0 (2019xxyy) CUR DEV
+### logre 1.2.0 (2020xxyy) CUR DEV
 #### ```Added```
 * Added about window
 * Added support for journalctl

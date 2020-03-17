@@ -21,27 +21,39 @@ available for:
 
 </div>
 
-
-# logre
 ## about
-logre is a linux logfile reader. Right now it only supports ```syslog```. It is based on electron and uses several javascript libraries to offer some conveniences.
+**logre** is a linux logfile reader. Right now it supports 
+
+* ```syslog```  
+* ```journalctl```
+
 Log messages can be filtered, sorted and exported in several formats.
 
+### download
+Download the latest release from [here](https://github.com/yafp/logre/releases).
+
+## license
+Please see the [LICENSE](LICENSE) for more details.
 
 ## changelog
 Please see the [changlog](docs/CHANGELOG.md) for more details.
 
 ## install
-### linux
-
-#### .deb
+### .deb
 * Download the latest .deb
 * execute: ```sudo dpkg -i /path/to/local/logre-file.deb```
 
-#### AppImage
+### AppImage
 * Copy the AppImage to the desired location
 * Make it executable: ```chmod +x /path/to/local/logre-file.AppImage```
 * Execute it
 
-#### Snap
+### Snap
 * Execute: ```sudo snap install /path/to/local/logre-file.snap```
+
+
+## support / fund
+If you want to support the development of **logre** you can fund me on:
+
+* [github](https://github.com/sponsors/yafp)
+* [patreon](https://www.patreon.com/yafp)
