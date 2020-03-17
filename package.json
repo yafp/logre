@@ -1,7 +1,7 @@
 {
   "name": "logre",
-  "version": "1.1.20200316",
-  "description": "A simple syslog reader",
+  "version": "1.1.20200317",
+  "description": "a simple log reader for linux",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -25,7 +25,7 @@
   "author": "yafp  <fidel@yafp.de>",
   "license": "GPL-3.0",
   "build": {
-    "productName": "Logre",
+    "productName": "logre",
     "appId": "logre",
     "linux": {
       "target": [
@@ -36,7 +36,7 @@
       ],
       "executableName": "logre",
       "icon": "app/img/icon/icon.png",
-      "description": "A simple syslog reader",
+      "description": "a simple log reader for linux",
       "category": "System"
     }
   },
@@ -46,6 +46,16 @@
     "animate.css": "^3.7.2",
     "bootstrap": "^4.4.1",
     "custom-electron-titlebar": "^3.2.2-hotfix62",
+    "datatables": "^1.10.18",
+    "datatables.net": "^1.10.20",
+    "datatables.net-bs": "^1.10.20",
+    "datatables.net-buttons": "^1.6.1",
+    "datatables.net-colreorder": "^1.5.2",
+    "datatables.net-colreorder-dt": "^1.5.2",
+    "datatables.net-fixedcolumns": "^3.3.0",
+    "datatables.net-fixedheader": "^3.1.6",
+    "datatables.net-scroller": "^2.0.1",
+    "datatables.net-select": "^1.3.1",
     "electron-log": "^4.1.0",
     "journalctl": "^1.1.0",
     "jquery": "^3.4.1",
@@ -64,7 +74,6 @@
       "/dist",
       "/docs/jsdocs",
       "/test/spec.js",
-      "/app/js/datatables",
       "/app/js/select2",
       "/app/js/semver"
     ]
