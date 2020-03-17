@@ -105,59 +105,199 @@ function journalCtlStart () {
 
     // in cli: journalctl -o short  = syslog like info columns only
 
-    // init it
-    var t = $('#dtJournalCtl').DataTable()
+    // init the datatable
+    //
+    //var t = $('#dtJournalCtl').DataTable()
+    var table = $('#dtJournalCtl').DataTable({
+            order: [[0, 'desc']], // order based on ID
+            dom: 'Bfrtip',
+
+            // Buttons
+            buttons: [
+                {
+                    extend: 'print',
+                    name: 'printButton',
+                    text: 'Print'
+                },
+                {
+                    extend: 'copy',
+                    name: 'copyButton',
+                    text: 'Clipboard'
+                },
+                {
+                    extend: 'csv',
+                    name: 'csvButton',
+                    text: 'CSV'
+                },
+                {
+                    extend: 'excel',
+                    name: 'excelButton',
+                    text: 'Excel'
+                },
+                {
+                    extend: 'pdf',
+                    name: 'pdfButton',
+                    text: 'PDF'
+                },
+                {
+                    extend: 'colvis',
+                    name: 'colvisButton',
+                    text: 'Columns'
+                }
+            ],
+
+            // colreorder
+            colReorder: true,
+
+            // pagination
+            pagingType: 'numbers',
+
+            // Dropdown for columns
+            //
+            initComplete: function () {
+                // Dropdown for all columns
+                // this.api().columns().every( function () {
+
+                // dropdown for some columns
+                var columns = [2, 3] // Add columns here
+                this.api().columns(columns).every(function () {
+                    var column = this
+                    var select = $('<select class="logreSelects"><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            )
+
+                            column.search(val ? '^' + val + '$' : '', true, false).draw()
+                        })
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    })
+                })
+            }
+            // End Dropdown for columns
+
+        })
+
+
 
     journalctl.on('event', (event) => {
         // console.error(event)
 
-        // 1. PID
-        var pid = event._PID
+        // https://www.freedesktop.org/software/systemd/man/systemd.journal-fields.html#
+
+
+        // PID (Trusted journal field)
+        //
+        // The process, user, and group ID of the process the journal entry originates from formatted as a decimal string. 
+        // Note that entries obtained via "stdout" or "stderr" of forked processes will contain credentials 
+        // valid for a parent process (that initiated the connection to systemd-journald).
+        var pid = ''
+        if (typeof event._PID !== 'undefined') {
+            pid = event._PID
+        }
+
+        // _SOURCE_REALTIME_TIMESTAMP (Trusted journal field)
+        //
+        // The earliest trusted timestamp of the message, if any is known that is different from the reception time of the journal. 
+        // This is the time in microseconds since the epoch UTC, formatted as a decimal string.
+        var realtimeTimestamp = ''
+        if (typeof event._SOURCE_REALTIME_TIMESTAMP !== 'undefined') {
+            realtimeTimestamp = event._SOURCE_REALTIME_TIMESTAMP
+
+            // make it hiuman readable
+            //realtimeTimestamp = calcHumanReadableTimeStamp(realtimeTimestamp)
+        }
+
+        // _MACHINE_ID (Trusted journal field)
+        //
+        // The machine ID of the originating host, as available in machine-id(5).
+        var machineId = ''
+        if (typeof event._MACHINE_ID !== 'undefined') {
+            machineId = event._MACHINE_ID
+        }
+
+        // _HOSTNAME (Trusted journal field)
+        //
+        // The name of the originating host.
+        var hostname = ''
+        if (typeof event._HOSTNAME !== 'undefined') {
+            hostname = event._HOSTNAME
+        }
+
+
+
+
+
+
+
 
         // SYSLOG_TIMESTAMP
-        var syslogTimestamp = 'UNDEFINED'
+        var syslogTimestamp = ''
         if (typeof event.SYSLOG_TIMESTAMP !== 'undefined') {
             syslogTimestamp = event.SYSLOG_TIMESTAMP
         }
 
-        // EXE
-        var exe = 'UNDEFINED'
-        if (typeof event._EXE !== 'undefined') {
-            exe = event._EXE
+        // PRIORITY
+        var priority = ''
+        if (typeof event.PRIORITY !== 'undefined') {
+            priority = event.PRIORITY
         }
 
-        // MESSAGE
-        var message = 'UNDEFINED'
-        if (typeof event.MESSAGE !== 'undefined') {
-            message = event.MESSAGE
-        }
-
-        // SYSLOG_IDENTIFIER (seems good)
-        var syslogIdentifier = 'UNDEFINED'
+        // SYSLOG_IDENTIFIER
+        var syslogIdentifier = ''
         if (typeof event.SYSLOG_IDENTIFIER !== 'undefined') {
             syslogIdentifier = event.SYSLOG_IDENTIFIER
         }
 
         // UNIT
-        var unit = 'UNDEFINED'
+        var unit = ''
         if (typeof event.UNIT !== 'undefined') {
             unit = event.UNIT
         }
 
-        // Message
-        // __REALTIME_TIMESTAMP
-        // _SYSTEMD_UNIT
-        // _COMM
-        // _HOSTNAME
-        // SYSLOG_TIMESTAMP
-        // SYSLOG_IDENTIFIER
-        // _CMDLINE
+        // EXE (Trusted journal field)
+        var exe = ''
+        if (typeof event._EXE !== 'undefined') {
+            exe = event._EXE
+        }
 
-        journalCtlAddRecord(pid, syslogTimestamp, syslogIdentifier, unit, exe, message)
+        // MESSAGE
+        //
+        // The human-readable message string for this entry. This is supposed to be the primary text shown to the user. 
+        // It is usually not translated (but might be in some cases), and is not supposed to be parsed for metadata.
+        var message = ''
+        if (typeof event.MESSAGE !== 'undefined') {
+            message = event.MESSAGE
+        }
 
-        // https://www.freedesktop.org/software/systemd/man/systemd.journal-fields.html#
+        // MESSAGE_ID
+        //
+        // A 128-bit message identifier ID for recognizing certain message types, if this is desirable. 
+        // This should contain a 128-bit ID formatted as a lower-case hexadecimal string, without any separating dashes or suchlike. 
+        // This is recommended to be a UUID-compatible ID, but this is not enforced, and formatted differently. 
+        // Developers can generate a new ID for this purpose with systemd-id128 new. 
+        var messageId = ''
+        if (typeof event.MESSAGE_ID !== 'undefined') {
+            messageId = event.MESSAGE_ID
+        }
 
-        // https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs
+        // Add record to table
+        journalCtlAddRecord(
+            pid, 
+            realtimeTimestamp, 
+            machineId,
+            hostname,
+            syslogTimestamp, 
+            priority, 
+            syslogIdentifier, 
+            unit, 
+            exe, 
+            message, 
+            messageId
+            )
     })
 }
 
@@ -167,17 +307,21 @@ function journalCtlStart () {
 * @description Adds a record to the journalctl dataTable
 * @memberof renderer
 */
-function journalCtlAddRecord (pid, timestamp, syslogIdentifier, unit, exe, message) {
+function journalCtlAddRecord (pid, realtimeTimestamp, machineId, hostname, timestamp, priority, syslogIdentifier, unit, exe, message, messageId) {
     var t = $('#dtJournalCtl').DataTable()
 
     t.row.add([
         pid,
+        realtimeTimestamp,
+        machineId,
+        hostname,
         timestamp,
-        '.3',
+        priority,
         syslogIdentifier,
         unit,
         exe,
-        message
+        message,
+        messageId
     ]).draw(false)
 }
 
@@ -212,7 +356,7 @@ function titlebarInit () {
 */
 function syslogStart () {
     // init select2
-    $('#logSource').select2()
+    //$('#logSource').select2()
 
     // creating empty arrays
     var arrayLogDate = []
@@ -313,7 +457,7 @@ function syslogStart () {
 
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'csv', 'excel', 'pdf'
+                'copy', 'csv', 'excel', 'pdf', 'colvis'
             ],
 
             // pagination
@@ -370,11 +514,6 @@ function syslogStart () {
             }
             // End Dropdown for columns
 
-        })
-
-        // Custom search field for DataTable
-        $('#myInputTextField').keyup(function () {
-            table.search($(this).val()).draw()
         })
 
         console.log('syslogStart ::: Finished initializing the DataTable')
@@ -508,6 +647,32 @@ function checkForNewLogreRelease () {
         }
     })
 }
+
+function switchTab(tab){
+     utils.writeConsoleMsg('info', 'switchTab ::: ' + tab)
+    $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+}
+
+
+
+
+
+function calcHumanReadableTimeStamp(unixTimestamp) {
+
+    //var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+    //d.setUTCSeconds(input);
+    //return d
+
+
+    dateObj = new Date(unixTimestamp * 1000); 
+    utcString = dateObj.toUTCString(); 
+    time = utcString.slice(-11, -4); 
+
+    return time
+
+}
+
+
 
 // ----------------------------------------------------------------------------
 // IPC - by mainwindow on-ready
