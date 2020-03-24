@@ -34,19 +34,29 @@ The following categories are used:
 #### ```Added```
 * Added about window
 * Added support for journalctl
+* Added support for window position and size storing and restoring
+* Added basic crash-handling using crashReporter, sentry and unhandled
+* Builds: Adding support for
+  * rpm
+  * pacman
 
 #### ```Changed```
+* Start
+  * Logre now checks only on app start for updates, not on each reload
+* UI
+  * mainwindow now has a minimal window height & width
+  * Only content of tables is now selectable text. Anything else should feel like an application, not like a website.
 * Dependencies (updated)
-  * Updated electrom from 4.2.12 to 8.1.1
-  * updated electron-builder from 20.44.4 to 22.4.1
+  * Updated ```electron``` from ```4.2.12``` to ```8.1.1```
+  * updated ```electron-builder``` from ```20.44.4``` to ```22.4.1```
 * Dependencies (new)
-  * Added standardx 5.0.0
-  * Added snazzy 8.0.0
-  * Added about-window 1.13.2
-  * Added noty 3.2.0-beta
-  * Added popper.js 1.16.1
-  * Added animate.css 3.7.2
-  * Added electron-log 4.1.0
+  * Added standardx ```5.0.0```
+  * Added snazzy ```8.0.0```
+  * Added about-window ```1.13.2```
+  * Added noty ```3.2.0-beta```
+  * Added popper.js ```1.16.1```
+  * Added animate.css ```3.7.2```
+  * Added electron-log ```4.1.0```
   * Added journalctl
   * Added fontAwesome
   * Added which

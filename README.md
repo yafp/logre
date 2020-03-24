@@ -17,19 +17,26 @@ available for:
 ![GitHub commits since latest release](https://img.shields.io/github/commits-since/yafp/logre/latest.svg)
 ![GitHub](https://img.shields.io/github/license/yafp/logre.svg)
 
-![logo](https://raw.githubusercontent.com/yafp/logre/master/.github/ui_latest.png)
+![logo](https://raw.githubusercontent.com/yafp/logre/master/.github/images/screenshots/ui_latest_home.png)
+
+![logo](https://raw.githubusercontent.com/yafp/logre/master/.github/images/screenshots/ui_latest_syslog.png)
 
 </div>
 
 ## about
 **logre** is a linux logfile reader. Right now it supports 
 
-* ```syslog```  
+* ```syslog``` 
 * ```journalctl```
+
+Please be aware that: 
+
+* the table showing the ```syslog``` data needs manual reload to show new entries.
+* the table showing the ```journalctl``` data updates itself on each event.
 
 Log messages can be filtered, sorted and exported in several formats.
 
-### download
+## download
 Download the latest release from [here](https://github.com/yafp/logre/releases).
 
 ## license
@@ -57,3 +64,9 @@ If you want to support the development of **logre** you can fund me on:
 
 * [github](https://github.com/sponsors/yafp)
 * [patreon](https://www.patreon.com/yafp)
+
+***
+
+## credits
+### icon
+* Application [icon](https://www.flaticon.com/free-icon/wood_2670424) made by [Nikita Golubev](https://www.flaticon.com/authors/nikita-golubev) from [www.flaticon.com](https://www.flaticon.com/)
