@@ -7,18 +7,6 @@ body {
 
 }
 
-
-/* Boxes */
-.boxes {
-  float: left;
-  width: 20px;
-  height: 20px;
-  margin: 5px;
-  border: 1px solid rgba(0, 0, 0, .2);
-}
-
-
-
 .container-fluid {
    padding: 20px !important;
 }
@@ -31,15 +19,19 @@ body {
     animation-delay: 0.5s; /* custom animation delay */
 }
 
-
 /* ########################################################################## */
-/* UI TEXT - MAKE THEM NOT SELECTABLE */
+/* UI TEXT - MAKE THEM NOT SELECTABLE OR SELECTABLE */
 /* ########################################################################## */
 .logre_nonSelectableText {
-    -webkit-user-select:none;
-    -moz-user-select: none;
+  -webkit-user-select:none;
+  -moz-user-select: none;
+  
 }
 
+.logre_selectableText {
+    -webkit-user-select:text;
+    -moz-user-select: text;
+}
 
 /* ########################################################################## */
 /* CUSTOM-TITLEBAR */
@@ -47,7 +39,6 @@ body {
 .window-title{
     font-size: 13px !important;
 }
-
 
 /* ########################################################################## */
 /* WINDOW BORDER - after custom-titlebar */
@@ -88,6 +79,32 @@ body {
 
 
 
+/* ########################################################################## */
+/* TAB: HOME; */
+/* ########################################################################## */
+.homeService{
+  margin: 10px;
+  padding: 50px;
+  width: 256px;
+  height: 256px;
+  text-align: center;
+  background-image: url('../../img/trans/icon.png');
+  opacity:0.7;
+}
+
+.homeService:hover{
+    opacity:1.0;
+}
+
+.homeServiceIcon{
+  color: #585858;
+}
+
+.homeServiceIcon:hover{
+  /* color: #282828; */
+}
+
+
 
 /* ########################################################################## */
 /* DATATABLES */
@@ -96,6 +113,20 @@ th { font-size: 12px; }
 td { font-size: 12px; }
 
 
+
+
+/* ########################################################################## */
+/* TAB: SYSLOG; */
+/* ########################################################################## */
+
+/* Boxes */
+.boxes {
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
 
 
 
@@ -152,34 +183,4 @@ td { font-size: 12px; }
 
 .m_gray {
     background-color: LightGray;
-}
-
-
-
-
-
-
-/* ########################################################################## */
-/* TAB: HOME; */
-/* ########################################################################## */
-.homeService{
-  margin: 10px;
-  padding: 50px;
-  width: 256px;
-  height: 256px;
-  text-align: center;
-  background-image: url('../../img/trans/icon.png');
-  opacity:0.7;
-}
-
-.homeService:hover{
-    opacity:1.0;
-}
-
-.homeServiceIcon{
-  color: #585858;
-}
-
-.homeServiceIcon:hover{
-  /* color: #282828; */
 }

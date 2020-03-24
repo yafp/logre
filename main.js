@@ -1,43 +1,144 @@
-// Modules to control application life and create native browser window
-const { app, BrowserWindow, Menu } = require('electron')
+/**
+* @file Contains the main.js code of logre
+* @author yafp
+* @namespace main
+*/
+
+// -----------------------------------------------------------------------------
+// REQUIRE: 3rd PARTY
+// -----------------------------------------------------------------------------
+const { app, BrowserWindow, electron, ipcMain, Menu } = require('electron')
+const path = require('path')
+const fs = require('fs')
 const shell = require('electron').shell
 const openAboutWindow = require('about-window').default // for: about-window
+
+// ----------------------------------------------------------------------------
+// REQUIRE: LOGRE MODULES
+// ----------------------------------------------------------------------------
 const { urlGitHubGeneral, urlGitHubIssues, urlGitHubChangelog, urlGitHubReleases } = require('./app/js/modules/githubUrls.js') // project-urls
+const crash = require('./app/js/modules/crashReporter.js') // crashReporter
+const sentry = require('./app/js/modules/sentry.js') // sentry
+const unhandled = require('./app/js/modules/unhandled.js') // electron-unhandled
+
+// ----------------------------------------------------------------------------
+// VARIABLES & CONSTANTS
+// ----------------------------------------------------------------------------
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-var path = require('path') // needed for icon-handling
+// var path = require('path') // needed for icon-handling
 var iconPath = path.join(__dirname, '/app/img/icon/icon.png')
 
+const defaultUserDataPath = app.getPath('userData') // for: storing window position and size
+
+// mainWindow: minimal window size
+const mainWindowMinimalWindowHeight = 800
+const mainWindowMinimalWindowWidth = 900
+
+// ----------------------------------------------------------------------------
+// FUNCTIONS
+// ----------------------------------------------------------------------------
+
+/**
+* @function doLog
+* @summary Writes console output for the main process
+* @description Writes console output for the main process
+* @memberof main
+* @param {string} type - The log type
+* @param {string} message - The log message
+*/
+function doLog (type, message) {
+    const prefix = '[   Main   ] '
+    const log = require('electron-log')
+    // electron-log can: error, warn, info, verbose, debug, silly
+    switch (type) {
+    case 'info':
+        log.info(prefix + message)
+        break
+
+    case 'warn':
+        log.warn(prefix + message)
+        break
+
+    case 'error':
+        log.error(prefix + message)
+        break
+
+    default:
+        log.silly(prefix + message)
+            // code block
+    }
+}
+
+/**
+* @function createWindowMain
+* @summary Creates the mainWindow
+* @description Creates the mainWindow (restores window position and size of possible)
+* @memberof main
+*/
 function createWindow () {
+    // Check last window position and size from user data
+    var windowWidth
+    var windowHeight
+    var windowPositionX
+    var windowPositionY
+
+    // Read a local config file
+    var customUserDataPath = path.join(defaultUserDataPath, 'LogreWindowPosSize.json')
+    var data
+    try {
+        data = JSON.parse(fs.readFileSync(customUserDataPath, 'utf8'))
+
+        // size
+        windowWidth = data.bounds.width
+        windowHeight = data.bounds.height
+
+        // position
+        windowPositionX = data.bounds.x
+        windowPositionY = data.bounds.y
+
+        doLog('info', 'createWindowMain ::: Got last window position and size information from _' + customUserDataPath + '_.')
+    } catch (e) {
+        doLog('warn', 'createWindowMain ::: No last window position and size information found in _' + customUserDataPath + '_. Using fallback values')
+
+        // set some default values for window size
+        windowWidth = mainWindowMinimalWindowWidth
+        windowHeight = mainWindowMinimalWindowHeight
+    }
+
     // Create the browser window.
     mainWindow = new BrowserWindow({
         frame: false, // false results in a borderless window. Needed for custom titlebar
         titleBarStyle: 'hidden', // needed for custom-electron-titlebar. See: https://electronjs.org/docs/api/frameless-window
-        width: 1000,
-        height: 1000,
+        width: windowWidth,
+        minWidth: mainWindowMinimalWindowWidth,
+        height: windowHeight,
+        minHeight: mainWindowMinimalWindowHeight,
         resizable: true, // false = not resizeable
         show: false, // show when ready-to-show
-        // icon: __dirname + "build/icons",
         icon: iconPath,
+
         webPreferences:
         {
             nodeIntegration: true
         }
     })
 
+    // Restore window position if possible
+    //
+    // requirements: found values in MediaDupesWindowPosSize.json from the previous session
+    if ((typeof windowPositionX !== 'undefined') && (typeof windowPositionY !== 'undefined')) {
+        mainWindow.setPosition(windowPositionX, windowPositionY)
+    }
+
     // and load the index.html of the app.
     mainWindow.loadFile('app/index.html')
 
     // configure menu
-    //
     mainWindow.setMenu(null) // works for builds, not while developing
-    // mainWindow.setAutoHideMenuBar(true) // autohide seems to work
-
-    // Open the DevTools. (manual trigger via: CTRL + SHIFT + I)
-    // mainWindow.webContents.openDevTools()
 
     mainWindow.on('ready-to-show', function () {
         mainWindow.show()
@@ -45,11 +146,35 @@ function createWindow () {
         mainWindow.webContents.send('checkThingsOnceAtStart')
     })
 
+    // Emitted before the window is closed.
+    mainWindow.on('close', function (event) {
+        doLog('info', 'createWindowMain ::: mainWindow will close (event: close)')
+
+        // get window position and size
+        var data = {
+            bounds: mainWindow.getBounds()
+        }
+
+        // define target path (in user data)
+        var customUserDataPath = path.join(defaultUserDataPath, 'LogreWindowPosSize.json')
+
+        // try to write
+        fs.writeFile(customUserDataPath, JSON.stringify(data), function (error) {
+            if (error) {
+                doLog('error', 'createWindowMain ::: storing window-position and -size of mainWindow in  _' + customUserDataPath + '_ failed with error: _' + error + '_ (event: close)')
+                throw error
+            }
+
+            doLog('info', 'createWindowMain ::: mainWindow stored window-position and -size in _' + customUserDataPath + '_ (event: close)')
+        })
+    })
+
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
+        doLog('info', 'createWindowMain ::: mainWindow is closed (event: closed)')
+        // Dereference the window object, usually you would store windows
+        // in an array if your app supports multi windows, this is the time
+        // when you should delete the corresponding element.
         mainWindow = null
     })
 }
@@ -292,7 +417,7 @@ function createMenuMain () {
 // Some APIs can only be used after this event occurs.
 // app.on('ready', createWindow)
 app.on('ready', function () {
-    // forceSingleAppInstance() // check for single instance
+    // forceSingleAppInstance() // check for single instance. We DONT want to force a singleInstance for this particular app.
     createWindow() // create the application UI
     createMenuMain() // create the application menu
 })
@@ -316,14 +441,3 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-
-// resizing the main window
-const { ipcMain } = require('electron')
-ipcMain.on('resize-me-please', (event, arg, arg2) => {
-    // resize window
-    // mainWindow.setSize(width,height)
-    mainWindow.setSize(arg, arg2)
-
-    // center window
-    mainWindow.center()
-})
