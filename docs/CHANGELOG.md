@@ -47,8 +47,9 @@ The following categories are used:
   * mainwindow now has a minimal window height & width
   * Only content of tables is now selectable text. Anything else should feel like an application, not like a website.
 * Dependencies (updated)
-  * Updated ```electron``` from ```4.2.12``` to ```8.1.1```
-  * updated ```electron-builder``` from ```20.44.4``` to ```22.4.1```
+  * Updated ```electron``` from ```4.2.12``` to ```8.2.5```
+  * updated ```electron-builder``` from ```20.44.4``` to ```22.6.0```
+  * updated ```electron-log``` from ```4.1.1``` to ```4.1.2```
 * Dependencies (new)
   * Added standardx ```5.0.0```
   * Added snazzy ```8.0.0```
@@ -57,6 +58,9 @@ The following categories are used:
   * Added popper.js ```1.16.1```
   * Added animate.css ```3.7.2```
   * Added electron-log ```4.1.0```
+  * Added jquery ```3.5.0```
+  * Added electron-util ```0.14.1```
+  * Added jszip ```3.4.0```
   * Added journalctl
   * Added fontAwesome
   * Added which
